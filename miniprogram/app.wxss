@@ -1,0 +1,152 @@
+/* ============================================================
+   Claymorphism 软糖泥塑风 · 全局设计系统
+   配色：薰衣草紫为主调，热粉仅作点缀，蜜桃/婴儿蓝/薄荷平衡
+   （降粉版：更清爽、更耐看，避免过度甜腻）
+   ============================================================ */
+
+page {
+  background: #F4F2FA;               /* 淡薰衣草白 */
+  font-size: 28rpx;
+  color: #46405A;                    /* 深紫灰 */
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+}
+
+/* ---------- 设计 Token ----------
+   主色（紫）:  #7C3AED 活力紫
+   次色（粉）:  #EC4899 点缀粉（少量）
+   中性:        #F4F2FA 底 / #FFFFFF 卡 / #46405A 字 / #9A93A8 弱字
+   点缀:        #ADD8E6 婴儿蓝 / #A7F3D0 薄荷 / #FDE68A 奶黄
+----------------------------------- */
+
+/* ---------- 主按钮：软糖紫 ---------- */
+.btn-primary {
+  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+  color: #fff;
+  border: none;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow:
+    0 8rpx 20rpx rgba(124, 58, 237, 0.28),
+    0 2rpx 6rpx rgba(124, 58, 237, 0.18),
+    inset 0 2rpx 3rpx rgba(255, 255, 255, 0.30);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+.btn-primary::after { border: none; }
+.btn-primary.button-hover,
+.btn-primary:active {
+  transform: scale(0.95);
+  box-shadow:
+    0 4rpx 10rpx rgba(124, 58, 237, 0.22),
+    inset 0 2rpx 4rpx rgba(0, 0, 0, 0.08);
+}
+.btn-primary[disabled] {
+  opacity: 0.55;
+  color: #fff;
+  box-shadow: 0 4rpx 12rpx rgba(124, 58, 237, 0.16);
+}
+
+/* ---------- 次按钮：描边软糖 ---------- */
+.btn-plain {
+  background: #FFFFFF;
+  color: #7C3AED;
+  border: 3rpx solid #DDD6FE;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow:
+    0 6rpx 16rpx rgba(124, 58, 237, 0.10),
+    inset 0 2rpx 3rpx rgba(255, 255, 255, 0.6);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+.btn-plain::after { border: none; }
+.btn-plain.button-hover,
+.btn-plain:active {
+  transform: scale(0.95);
+  background: #F5F3FF;
+  box-shadow: 0 3rpx 8rpx rgba(124, 58, 237, 0.08);
+}
+
+/* ---------- 卡片 ---------- */
+.card {
+  background: #FFFFFF;
+  border-radius: 32rpx;
+  box-shadow:
+    0 10rpx 30rpx rgba(124, 58, 237, 0.08),
+    0 2rpx 8rpx rgba(124, 58, 237, 0.04),
+    inset 0 1rpx 2rpx rgba(255, 255, 255, 0.8);
+}
+
+/* ---------- 标签 ---------- */
+.tag {
+  display: inline-block;
+  padding: 6rpx 18rpx;
+  border-radius: 24rpx;
+  font-size: 22rpx;
+  background: linear-gradient(135deg, #EDE9FE, #DDD6FE);
+  color: #6D28D9;
+  font-weight: 500;
+  box-shadow: inset 0 1rpx 2rpx rgba(255, 255, 255, 0.6);
+}
+
+/* ---------- 输入框 ---------- */
+.input {
+  background: #F4F2FA;
+  border-radius: 24rpx;
+  padding: 22rpx 28rpx;
+  font-size: 28rpx;
+  color: #46405A;
+  box-shadow:
+    inset 0 3rpx 6rpx rgba(124, 58, 237, 0.07),
+    inset 0 -1rpx 2rpx rgba(255, 255, 255, 0.7);
+  border: 2rpx solid transparent;
+  transition: border-color 0.2s;
+}
+.input:focus {
+  border-color: #C4B5FD;
+  background: #FFFFFF;
+}
+
+/* ---------- 工具类 ---------- */
+.muted { color: #9A93A8; font-size: 24rpx; }
+
+.empty {
+  text-align: center;
+  color: #BDB4CE;
+  padding: 120rpx 0;
+  font-size: 26rpx;
+}
+
+/* ---------- 芯片（筛选/季节） ---------- */
+.chip {
+  display: inline-block;
+  padding: 14rpx 30rpx;
+  border-radius: 32rpx;
+  font-size: 24rpx;
+  background: #FFFFFF;
+  color: #9A93A8;
+  border: 2rpx solid #EAE6F5;
+  box-shadow:
+    0 4rpx 10rpx rgba(124, 58, 237, 0.06),
+    inset 0 1rpx 2rpx rgba(255, 255, 255, 0.7);
+  transition: all 0.2s;
+}
+.chip.active,
+scroll-view .chip.active,
+.filter-row .chip.active {
+  background: linear-gradient(135deg, #8B5CF6, #7C3AED) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  font-weight: 600;
+  box-shadow:
+    0 6rpx 16rpx rgba(124, 58, 237, 0.30),
+    inset 0 2rpx 3rpx rgba(255, 255, 255, 0.30);
+}

@@ -1,0 +1,205 @@
+.page { padding: 0 24rpx 40rpx; box-sizing: border-box; }
+
+/* 吸顶区：搜索 + 筛选，只有列表内容滚动 */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #F4F2FA;
+  padding-bottom: 4rpx;
+  /* 底部柔和过渡，避免硬边 */
+  box-shadow: 0 6rpx 16rpx rgba(244, 242, 250, 0.9);
+}
+
+/* 搜索栏 */
+.search-bar {
+  padding: 20rpx 0 14rpx;
+  display: flex;
+  align-items: center;
+}
+.sort-picker { display: block; width: auto; flex: none; margin-left: 16rpx; }
+.sort-btn {
+  flex: none;
+  padding: 18rpx 24rpx;
+  border-radius: 40rpx;
+  background: #fff;
+  color: #7C3AED;
+  font-size: 24rpx;
+  font-weight: 600;
+  box-shadow: 0 6rpx 18rpx rgba(124, 58, 237, 0.08);
+}
+.sort-btn:active { transform: scale(0.95); }
+.search-input {
+  flex: 1;
+  background: #FFFFFF;
+  border-radius: 40rpx;
+  padding: 20rpx 34rpx;
+  font-size: 28rpx;
+  color: #46405A;
+  box-shadow:
+    0 6rpx 18rpx rgba(124, 58, 237, 0.08),
+    inset 0 1rpx 2rpx rgba(255, 255, 255, 0.8);
+}
+.search-clear {
+  margin-left: 16rpx;
+  width: 52rpx;
+  height: 52rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  color: #C4B5E0;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 4rpx 10rpx rgba(124, 58, 237, 0.10);
+}
+
+/* 筛选芯片（两行横滚） */
+.filter-scroll { white-space: nowrap; margin: 4rpx 0 10rpx; }
+.filter-row { display: inline-flex; gap: 16rpx; padding: 6rpx 2rpx; }
+
+/* 双列等宽网格（固定高度卡片，替代原瀑布流以支持内存窗口/虚拟化） */
+.waterfall {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+  margin-top: 6rpx;
+}
+/* columns 仍由 JS 拆分，这里让 grid 直接平铺 list 更整齐——
+   若保留双 column 结构，column 为 flex 列即可 */
+.column { display: flex; flex-direction: column; gap: 20rpx; min-width: 0; }
+
+.item-card {
+  overflow: hidden;
+  border-radius: 32rpx;
+  background: #fff;
+  height: 700rpx;          /* 固定卡片总高：图片 400 + 文字区 300（含穿着次数一行） */
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 12rpx 30rpx rgba(124, 58, 237, 0.10),
+    0 3rpx 8rpx rgba(124, 58, 237, 0.05),
+    inset 0 2rpx 3rpx rgba(255, 255, 255, 0.85);
+  transition: transform 0.2s ease-out;
+}
+.item-card:active { transform: scale(0.97); }
+
+.item-img {
+  width: 100%;
+  height: 400rpx;          /* 图片加高，衣服看得更全 */
+  flex: none;
+  display: block;
+  background: linear-gradient(135deg, #F4F2FA, #EDE9FE);
+  border-radius: 32rpx 32rpx 0 0;
+}
+.item-body {
+  padding: 16rpx 20rpx 18rpx;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.item-name {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #46405A;
+  letter-spacing: 0.5rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; /* 名称超长省略 */
+}
+.item-tags {
+  margin-top: 10rpx;
+  display: flex;
+  flex-wrap: wrap;          /* 允许换行，不再 nowrap 挤压 */
+  gap: 8rpx;
+  overflow: hidden;
+  /* 最多两行标签，超出隐藏，避免挤压下方 */
+  max-height: 84rpx;
+  align-content: flex-start;
+}
+.tag-loc { background: linear-gradient(135deg, #E0F2FE, #DBEAFE); color: #2563EB; }
+.item-seasons {
+  margin-top: 8rpx;
+  color: #B4A7D4;
+  font-size: 22rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.item-wear {
+  margin-top: 6rpx;
+  color: #B4A7D4;
+  font-size: 22rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.item-wear.worn { color: #7C3AED; font-weight: 600; }
+
+/* 操作按钮：固定卡片底部（三个按钮：今天穿 / 编辑 / 删除） */
+.item-actions {
+  display: flex;
+  gap: 10rpx;
+  margin-top: auto;          /* 顶到卡片底部 */
+  border-top: 2rpx solid #F4F1FB;
+  padding-top: 14rpx;
+}
+.action-btn {
+  flex: 1;
+  text-align: center;
+  font-size: 22rpx;
+  font-weight: 600;
+  color: #7C3AED;
+  padding: 12rpx 0;
+  border-radius: 26rpx;
+  background: linear-gradient(135deg, #EDE9FE, #DDD6FE);
+  box-shadow: inset 0 1rpx 2rpx rgba(255,255,255,0.6);
+  transition: transform 0.15s;
+  white-space: nowrap;
+}
+.action-btn.wear { flex: 1.5; }
+.action-btn.wear.done {
+  color: #fff;
+  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+}
+.action-btn:active { transform: scale(0.93); }
+.action-btn.danger {
+  color: #E11D48;
+  background: linear-gradient(135deg, #FFE4E6, #FECDD3);
+}
+
+/* ---------- 骨架屏 ---------- */
+.skeleton-card { pointer-events: none; }
+.sk-img { width: 100%; height: 400rpx; flex: none; border-radius: 32rpx 32rpx 0 0; }
+.sk-line { height: 28rpx; border-radius: 14rpx; }
+.shimmer {
+  background: linear-gradient(90deg, #F1EEF9 25%, #E6E0F5 37%, #F1EEF9 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+.empty { padding: 140rpx 0; }
+.empty-sub { font-size: 24rpx; margin-top: 14rpx; color: #C4B5E0; }
+
+.loading-more {
+  text-align: center;
+  padding: 32rpx 0;
+  font-size: 24rpx;
+  color: #B4A7D4;
+}
+
+/* 内存窗口裁剪提示 */
+.trim-tip {
+  text-align: center;
+  font-size: 22rpx;
+  color: #C4B5E0;
+  background: #EDE9FE;
+  border-radius: 20rpx;
+  padding: 12rpx 20rpx;
+  margin: 16rpx 0 0;
+}

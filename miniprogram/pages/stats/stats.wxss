@@ -1,0 +1,38 @@
+.page { padding: 20rpx 24rpx 40rpx; box-sizing: border-box; }
+.kpi-row { display: flex; gap: 16rpx; margin-bottom: 20rpx; }
+.kpi { flex: 1; padding: 26rpx 12rpx; text-align: center; }
+.kpi-v { font-size: 52rpx; font-weight: 800; color: #7C3AED; line-height: 1.1; }
+.kpi-l { margin-top: 8rpx; font-size: 22rpx; color: #9A93A8; }
+
+.block { padding: 28rpx; margin-bottom: 20rpx; }
+.h { font-size: 28rpx; font-weight: 800; color: #46405A; margin-bottom: 22rpx; }
+.h .muted { margin-left: 10rpx; font-weight: 400; }
+
+/* 利用率：同色系轨道 + 填充 */
+.meter { height: 24rpx; border-radius: 12rpx; background: #EDE9FE; overflow: hidden; }
+.meter-fill { height: 100%; border-radius: 12rpx; background: linear-gradient(90deg, #A78BFA, #7C3AED); }
+.meter-text { display: flex; justify-content: space-between; margin-top: 14rpx; font-size: 24rpx; color: #46405A; }
+
+/* 月度柱状图：细柱 + 圆角顶，数值在柱顶（只标有数据的） */
+.cols { display: flex; align-items: flex-end; justify-content: space-between; height: 220rpx; }
+.col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.col-n { font-size: 22rpx; color: #46405A; height: 32rpx; line-height: 32rpx; }
+.col-bar { width: 36rpx; border-radius: 10rpx 10rpx 0 0; background: linear-gradient(180deg, #8B5CF6, #7C3AED); }
+.col-l { margin-top: 10rpx; font-size: 22rpx; color: #9A93A8; }
+
+/* 横向条形：名称 / 轨道 / 数值 */
+.bar-row { display: flex; align-items: center; margin-bottom: 18rpx; }
+.bar-name { width: 140rpx; font-size: 24rpx; color: #46405A; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.bar-track { flex: 1; height: 20rpx; margin: 0 16rpx; border-radius: 10rpx; background: #F4F1FB; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 10rpx; background: linear-gradient(90deg, #A78BFA, #7C3AED); }
+.bar-num { width: 60rpx; text-align: right; font-size: 24rpx; font-weight: 700; color: #7C3AED; }
+
+/* 排行 */
+.rank { display: flex; align-items: center; padding: 12rpx 0; }
+.rank-no { width: 44rpx; font-size: 28rpx; font-weight: 800; color: #B4A7D4; }
+.rank-img { width: 88rpx; height: 110rpx; border-radius: 16rpx; flex: none; background: #EDE9FE; }
+.rank-name { flex: 1; margin: 0 20rpx; font-size: 26rpx; color: #46405A; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.rank-val { font-size: 24rpx; font-weight: 700; color: #7C3AED; flex: none; }
+.rank-val.muted { font-weight: 400; color: #9A93A8; }
+.more-btn { margin-top: 14rpx; text-align: center; padding: 18rpx; border-radius: 28rpx; font-size: 26rpx; font-weight: 600; color: #7C3AED; background: linear-gradient(135deg, #EDE9FE, #DDD6FE); }
+.empty { padding: 140rpx 0; }

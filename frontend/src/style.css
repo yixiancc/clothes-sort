@@ -1,0 +1,196 @@
+/* ============ Claymorphism 软糖风主题（薰衣草紫） ============ */
+:root {
+  /* Element Plus 主色：活力紫 */
+  --el-color-primary: #7c3aed;
+  --el-color-primary-light-3: #9f6ff0;
+  --el-color-primary-light-5: #b794f4;
+  --el-color-primary-light-7: #d3c0f8;
+  --el-color-primary-light-8: #e2d5fb;
+  --el-color-primary-light-9: #f3effe;
+  --el-color-primary-dark-2: #6d28d9;
+  --el-border-radius-base: 14px;
+  --el-border-radius-small: 10px;
+
+  /* Clay token */
+  --clay-bg: #f4f2fa;
+  --clay-card: #ffffff;
+  --clay-text: #46405a;
+  --clay-text-soft: #9a93a8;
+  --clay-violet: #7c3aed;
+  --clay-shadow: 0 10px 30px rgba(124, 58, 237, .10), 0 2px 8px rgba(124, 58, 237, .05);
+}
+
+* { box-sizing: border-box; }
+
+html, body, #app {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(160deg, #ede9fe 0%, #f4f2fa 45%, #eef2ff 100%);
+  background-attachment: fixed;
+  color: #46405a;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 圆角化组件 + 软糖按压反馈 */
+.el-button { border-radius: 20px; transition: all .25s ease; font-weight: 600; }
+.el-button:hover { transform: translateY(-1px); }
+.el-button:active { transform: translateY(0) scale(.96); }
+.el-input__wrapper, .el-select__wrapper { border-radius: 14px; }
+.el-dialog { border-radius: 22px; }
+.el-card {
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 10px 30px rgba(124, 58, 237, .10), 0 2px 8px rgba(124, 58, 237, .05);
+}
+.el-tag { border-radius: 999px; border: none; }
+.el-drawer { border-radius: 22px 0 0 22px; }
+.el-table { --el-table-header-bg-color: #f3effe; border-radius: 16px; overflow: hidden; }
+
+/* ============ 顶栏 ============ */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  height: 56px;
+  background: rgba(255, 255, 255, .88);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 14px rgba(124, 58, 237, .12);
+}
+.app-header .title {
+  font-size: 18px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #8b5cf6, #7c3aed);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+}
+.app-header .spacer { flex: 1; }
+
+@media (max-width: 640px) {
+  .app-header { gap: 8px; padding: 0 10px; }
+  .app-header .title-text { display: none; }
+  .app-header .el-button { padding: 8px 8px; }
+}
+
+.page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* ============ 瀑布流 ============ */
+.waterfall {
+  column-count: 5;
+  column-gap: 14px;
+}
+@media (max-width: 1200px) { .waterfall { column-count: 4; } }
+@media (max-width: 992px)  { .waterfall { column-count: 3; } }
+@media (max-width: 640px)  { .waterfall { column-count: 2; column-gap: 10px; } .page { padding: 10px; } }
+
+.waterfall-item {
+  break-inside: avoid;
+  margin-bottom: 14px;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(124, 58, 237, .10), 0 3px 8px rgba(124, 58, 237, .05);
+  transition: transform .3s ease, box-shadow .3s ease;
+  animation: fadeInUp .5s ease both;
+}
+.waterfall-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(124, 58, 237, .22);
+}
+.waterfall-item img {
+  width: 100%;
+  display: block;
+  background: linear-gradient(135deg, #f4f2fa, #ede9fe);
+  transition: transform .4s ease;
+}
+.waterfall-item:hover img { transform: scale(1.03); }
+.waterfall-item .info { padding: 10px 12px; }
+.waterfall-item .name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #46405a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.waterfall-item .attr {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.waterfall-item .attr-icon { flex: none; font-size: 13px; }
+.waterfall-item .attr-text {
+  color: #9a93a8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.waterfall-item .season-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.waterfall-item .season-chip {
+  padding: 1px 8px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 11px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .12);
+}
+.waterfall-item .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 0 8px 8px;
+}
+
+/* ============ 工具栏 ============ */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+  align-items: center;
+  background: rgba(255, 255, 255, .8);
+  backdrop-filter: blur(8px);
+  padding: 12px;
+  border-radius: 20px;
+  box-shadow: 0 10px 24px rgba(124, 58, 237, .10);
+  animation: fadeInUp .4s ease both;
+}
+.toolbar .el-input, .toolbar .el-select { width: 200px; }
+@media (max-width: 640px) {
+  .toolbar .el-input, .toolbar .el-select { flex: 1 1 45%; width: auto; }
+}
+
+.load-more {
+  text-align: center;
+  color: #b4a7d4;
+  padding: 16px 0;
+  font-size: 13px;
+}
+
+/* ============ 动画 ============ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(.9); }
+  100% { opacity: 1; transform: scale(1); }
+}

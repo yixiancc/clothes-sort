@@ -1,0 +1,14 @@
+<view class="page">
+  <view class="card block">
+    <view class="label">当前地址</view>
+    <input class="input" value="{{baseUrl}}" bindinput="onInput" placeholder="如 http://192.168.1.5:5000" />
+    <view class="muted tip">
+      开发调试：填电脑的局域网 IP（如 http://192.168.x.x:5000），手机与电脑连同一 WiFi 即可访问本地后端。
+      线上环境：填 https 域名。
+    </view>
+    <view class="btn-row">
+      <button class="btn-plain half" bindtap="reset">恢复默认</button>
+      <button class="btn-primary half" bindtap="save">保存</button>
+    </view>
+  </view>
+</view>

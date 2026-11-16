@@ -1,0 +1,78 @@
+<view class="page" wx:if="{{s}}">
+  <!-- 一行 KPI：数字就是图表，不用一根柱子 -->
+  <view class="kpi-row">
+    <view class="kpi card"><view class="kpi-v">{{s.total}}</view><view class="kpi-l">件衣服</view></view>
+    <view class="kpi card"><view class="kpi-v">{{s.outfit_count}}</view><view class="kpi-l">套搭配</view></view>
+    <view class="kpi card" bindtap="goCalendar"><view class="kpi-v">{{s.wear_logs_30d}}</view><view class="kpi-l">近30天穿着 ›</view></view>
+  </view>
+
+  <view class="card block">
+    <view class="h">穿着利用率</view>
+    <view class="meter"><view class="meter-fill" style="width: {{s.total ? s.worn_total * 100 / s.total : 0}}%"></view></view>
+    <view class="meter-text">
+      <text>{{s.worn_total}} 件穿过</text>
+      <text class="muted">{{s.never_worn}} 件还没穿过</text>
+    </view>
+  </view>
+
+  <view class="card block">
+    <view class="h">近 6 个月穿着次数</view>
+    <view class="cols">
+      <view class="col" wx:for="{{monthly}}" wx:key="month">
+        <view class="col-n">{{item.count || ''}}</view>
+        <view class="col-bar" style="height: {{item.h}}rpx"></view>
+        <view class="col-l">{{item.label}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card block">
+    <view class="h">按季节</view>
+    <view class="bar-row" wx:for="{{seasons}}" wx:key="key">
+      <view class="bar-name">{{item.label}}</view>
+      <view class="bar-track"><view class="bar-fill" style="width: {{item.pct}}%"></view></view>
+      <view class="bar-num">{{item.count}}</view>
+    </view>
+  </view>
+
+  <view class="card block" wx:if="{{categories.length}}">
+    <view class="h">按分类</view>
+    <view class="bar-row" wx:for="{{categories}}" wx:key="name">
+      <view class="bar-name">{{item.name}}</view>
+      <view class="bar-track"><view class="bar-fill" style="width: {{item.pct}}%"></view></view>
+      <view class="bar-num">{{item.count}}</view>
+    </view>
+  </view>
+
+  <view class="card block" wx:if="{{locations.length}}">
+    <view class="h">按位置</view>
+    <view class="bar-row" wx:for="{{locations}}" wx:key="name">
+      <view class="bar-name">{{item.name}}</view>
+      <view class="bar-track"><view class="bar-fill" style="width: {{item.pct}}%"></view></view>
+      <view class="bar-num">{{item.count}}</view>
+    </view>
+  </view>
+
+  <view class="card block" wx:if="{{mostWorn.length}}">
+    <view class="h">最爱穿 TOP{{mostWorn.length}}</view>
+    <view class="rank" wx:for="{{mostWorn}}" wx:key="id">
+      <view class="rank-no">{{index + 1}}</view>
+      <image class="rank-img" src="{{item.image_url}}" mode="aspectFill" bindtap="preview" data-url="{{item.image_url}}" />
+      <view class="rank-name">{{item.name}}</view>
+      <view class="rank-val">{{item.wear_count}} 次</view>
+    </view>
+  </view>
+
+  <view class="card block" wx:if="{{s.stale_count > 0}}">
+    <view class="h">压箱底 <text class="muted">共 {{s.stale_count}} 件超过 {{s.stale_days}} 天没穿</text></view>
+    <view class="rank" wx:for="{{leastWorn}}" wx:key="id">
+      <image class="rank-img" src="{{item.image_url}}" mode="aspectFill" bindtap="preview" data-url="{{item.image_url}}" />
+      <view class="rank-name">{{item.name}}</view>
+      <view class="rank-val muted">{{item.note}}</view>
+    </view>
+    <view class="more-btn" bindtap="viewStale">去衣柜看看这些衣服 ›</view>
+  </view>
+
+  <view class="empty" wx:if="{{s.total === 0}}">衣柜还是空的，先去添加几件衣服吧</view>
+</view>
+<view class="empty" wx:elif="{{loading}}">加载中...</view>

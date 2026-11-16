@@ -1,0 +1,17 @@
+<view class="page">
+  <view class="add-row">
+    <input class="input add-input" placeholder="新位置名称（如：主卧衣柜）" value="{{newName}}" bindinput="onInput" maxlength="50" />
+    <button class="btn-primary add-btn" bindtap="add">添加</button>
+  </view>
+
+  <view class="card list-card" wx:if="{{list.length > 0}}">
+    <view class="row" wx:for="{{list}}" wx:key="id">
+      <text class="row-name">📍 {{item.name}}</text>
+      <view class="row-actions">
+        <text class="row-btn" bindtap="rename" data-id="{{item.id}}" data-name="{{item.name}}">改名</text>
+        <text class="row-btn danger" bindtap="remove" data-id="{{item.id}}">删除</text>
+      </view>
+    </view>
+  </view>
+  <view class="empty" wx:else>还没有位置，先添加一个吧</view>
+</view>

@@ -1,0 +1,44 @@
+<view class="page">
+  <!-- 图片 -->
+  <view class="img-area card" bindtap="chooseImage">
+    <image wx:if="{{imagePath || imageUrl}}" class="preview-img" src="{{imagePath || imageUrl}}" mode="aspectFit" />
+    <view wx:else class="img-placeholder">
+      <view class="plus">＋</view>
+      <view class="muted">拍照或从相册选择</view>
+    </view>
+  </view>
+
+  <!-- 名称 -->
+  <view class="form-block card">
+    <view class="label">名称</view>
+    <input class="input" placeholder="给这件衣服起个名字" value="{{name}}" bindinput="onInput" data-field="name" maxlength="100" />
+
+    <view class="label">分类</view>
+    <view class="picker-row">
+      <picker range="{{categoryNames}}" value="{{categoryIndex}}" bindchange="onCategoryChange">
+        <view class="picker">{{categoryIndex >= 0 && categoryNames[categoryIndex] ? categoryNames[categoryIndex] : '未分类'}}</view>
+      </picker>
+      <view class="picker-add" bindtap="addCategory">＋新建</view>
+    </view>
+
+    <view class="label">位置</view>
+    <view class="picker-row">
+      <picker range="{{locationNames}}" value="{{locationIndex}}" bindchange="onLocationChange">
+        <view class="picker">{{locationIndex >= 0 && locationNames[locationIndex] ? locationNames[locationIndex] : '未设置'}}</view>
+      </picker>
+      <view class="picker-add" bindtap="addLocation">＋新建</view>
+    </view>
+
+    <view class="label">适合季节（可多选）</view>
+    <view class="season-row">
+      <view class="season-chip {{seasonActive[item.key] ? 'active' : ''}}"
+            wx:for="{{seasons}}" wx:key="key" bindtap="toggleSeason" data-key="{{item.key}}">
+        {{item.label}}
+      </view>
+    </view>
+  </view>
+
+  <button class="btn-primary save-btn" bindtap="save" disabled="{{loading}}">
+    {{loading ? '保存中...' : '保 存'}}
+  </button>
+</view>

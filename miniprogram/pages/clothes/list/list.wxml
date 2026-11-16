@@ -1,0 +1,76 @@
+<view class="page">
+  <!-- 吸顶区：搜索 + 筛选（只有列表内容滚动） -->
+  <view class="sticky-header">
+    <!-- 搜索栏 + 排序 -->
+    <view class="search-bar">
+      <input class="search-input" placeholder="搜索衣服名称" value="{{keyword}}" confirm-type="search"
+             bindinput="onKeywordInput" bindconfirm="onSearch" />
+      <view class="search-clear" wx:if="{{keyword}}" bindtap="clearKeyword">×</view>
+      <picker class="sort-picker" mode="selector" range="{{sortOptions}}" value="{{sortIndex}}" bindchange="onSortChange">
+        <view class="sort-btn">{{sortLabel}} ▾</view>
+      </picker>
+    </view>
+
+    <!-- 筛选行 1：季节（可多选）+ 好久没穿 -->
+    <scroll-view scroll-x class="filter-scroll" enhanced show-scrollbar="{{false}}">
+      <view class="filter-row">
+        <view class="chip {{allActive ? 'active' : ''}}" bindtap="resetFilters">全部</view>
+        <view class="chip {{seasonActive[item.key] ? 'active' : ''}}" wx:for="{{seasons}}" wx:key="key"
+              bindtap="toggleSeason" data-key="{{item.key}}">{{item.label}}</view>
+        <view class="chip {{staleOnly ? 'active' : ''}}" bindtap="toggleStale">💤 好久没穿</view>
+      </view>
+    </scroll-view>
+    <!-- 筛选行 2：分类 + 位置（可多选） -->
+    <scroll-view scroll-x class="filter-scroll" enhanced show-scrollbar="{{false}}" wx:if="{{categories.length || locations.length}}">
+      <view class="filter-row">
+        <view class="chip {{categoryActive[c.id] ? 'active' : ''}}" wx:for="{{categories}}" wx:key="id" wx:for-item="c"
+              bindtap="toggleCategory" data-id="{{c.id}}">{{c.name}}</view>
+        <view class="chip chip-loc {{locationActive[l.id] ? 'active' : ''}}" wx:for="{{locations}}" wx:key="id" wx:for-item="l"
+              bindtap="toggleLocation" data-id="{{l.id}}">📍{{l.name}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 首次加载：骨架屏（灰色卡片轮廓，提升感知速度） -->
+  <view class="waterfall" wx:if="{{firstLoad && list.length === 0}}">
+    <view class="card item-card skeleton-card" wx:for="{{skeletons}}" wx:key="*this">
+      <view class="sk-img shimmer"></view>
+      <view class="item-body">
+        <view class="sk-line shimmer" style="width: 70%"></view>
+        <view class="sk-line shimmer" style="width: 45%; margin-top: 16rpx"></view>
+        <view class="sk-line shimmer" style="width: 55%; margin-top: 14rpx"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 衣服网格（固定高度双列） -->
+  <view class="waterfall" wx:elif="{{list.length > 0}}">
+    <view class="card item-card" wx:for="{{list}}" wx:key="id" bindtap="previewItem" data-item="{{item}}">
+      <image class="item-img" src="{{item.image_url}}" mode="aspectFill" lazy-load
+             binderror="onImageError" data-id="{{item.id}}" />
+      <view class="item-body">
+        <view class="item-name">{{item.name}}</view>
+        <view class="item-tags">
+          <text class="tag" wx:if="{{item.category_name}}">{{item.category_name}}</text>
+          <text class="tag tag-loc" wx:if="{{item.location_name}}">📍{{item.location_name}}</text>
+        </view>
+        <view class="item-seasons muted" wx:if="{{item.seasons && item.seasons.length}}">{{item.seasonText}}</view>
+        <view class="item-wear {{item.worn_today ? 'worn' : ''}}">{{item.wearText}}</view>
+        <view class="item-actions">
+          <view class="action-btn wear {{item.worn_today ? 'done' : ''}}" catchtap="toggleWear" data-id="{{item.id}}">{{item.worn_today ? '✓ 今天穿了' : '今天穿'}}</view>
+          <view class="action-btn" catchtap="editItem" data-id="{{item.id}}">编辑</view>
+          <view class="action-btn danger" catchtap="deleteItem" data-id="{{item.id}}">删除</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:elif="{{!loading}}">
+    <view>{{staleOnly ? '没有好久没穿的衣服，保持得不错～' : '衣柜空空如也~'}}</view>
+    <view class="empty-sub" wx:if="{{!staleOnly}}">点击下方「添加」记录第一件衣服吧</view>
+  </view>
+
+  <view class="trim-tip" wx:if="{{trimmed}}">为保持流畅，仅显示最近添加的衣服，可下拉刷新查看全部</view>
+  <view class="loading-more" wx:if="{{loading && list.length > 0}}">加载中...</view>
+  <view class="loading-more muted" wx:elif="{{list.length > 0 && !hasMore}}">— 到底啦 —</view>
+</view>

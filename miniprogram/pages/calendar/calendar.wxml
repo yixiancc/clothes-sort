@@ -1,0 +1,36 @@
+<view class="page">
+  <view class="card cal">
+    <view class="cal-head">
+      <view class="nav" bindtap="prevMonth">‹</view>
+      <view class="cal-title">{{year}} 年 {{month}} 月</view>
+      <view class="nav" bindtap="nextMonth">›</view>
+    </view>
+    <view class="cal-sub muted">本月穿了 {{wornDays}} 天 · 共 {{totalLogs}} 次</view>
+
+    <view class="week-row">
+      <view class="week" wx:for="{{week}}" wx:key="*this">{{item}}</view>
+    </view>
+    <view class="grid {{loading ? 'dim' : ''}}">
+      <block wx:for="{{cells}}" wx:key="key">
+        <view class="cell empty" wx:if="{{item.empty}}"></view>
+        <view wx:else class="cell {{item.selected ? 'sel' : ''}} {{item.isFuture ? 'future' : ''}}" bindtap="pick" data-date="{{item.date}}">
+          <view class="day {{item.isToday ? 'today' : ''}}">{{item.day}}</view>
+          <view class="dot" wx:if="{{item.count > 0}}">{{item.count}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="card detail" wx:if="{{selected}}">
+    <view class="h">{{selectedTitle}}穿了 <text class="muted">{{selectedItems.length}} 件</text></view>
+    <view class="row" wx:for="{{selectedItems}}" wx:key="clothes_id">
+      <image class="row-img" src="{{item.image_url}}" mode="aspectFill" bindtap="preview" data-url="{{item.image_url}}" />
+      <view class="row-main">
+        <view class="row-name">{{item.name}}</view>
+        <view class="row-tag" wx:if="{{item.outfit_name}}">搭配 · {{item.outfit_name}}</view>
+      </view>
+      <view class="row-undo" bindtap="undo" data-id="{{item.clothes_id}}">撤销</view>
+    </view>
+    <view class="empty-day" wx:if="{{selectedItems.length === 0}}">这天没有穿着记录</view>
+  </view>
+</view>

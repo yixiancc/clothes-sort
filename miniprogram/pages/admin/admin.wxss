@@ -1,0 +1,28 @@
+.page { padding: 0 24rpx 40rpx; box-sizing: border-box; }
+.search-bar { padding: 20rpx 0 16rpx; }
+.search-input {
+  background: #fff; border-radius: 40rpx; padding: 20rpx 34rpx; font-size: 28rpx; color: #46405A;
+  box-shadow: 0 6rpx 18rpx rgba(124, 58, 237, 0.08);
+}
+.summary { margin-bottom: 16rpx; padding: 16rpx 24rpx; border-radius: 24rpx; font-size: 24rpx; color: #B45309; background: #FEF3C7; }
+.user { display: flex; align-items: center; padding: 24rpx; margin-bottom: 16rpx; }
+.avatar {
+  flex: none; width: 88rpx; height: 88rpx; border-radius: 50%; margin-right: 22rpx;
+  background: linear-gradient(135deg, #A78BFA, #7C3AED); color: #fff; font-size: 38rpx; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.avatar.admin { background: linear-gradient(135deg, #FB7185, #E11D48); }
+.u-main { flex: 1; min-width: 0; }
+.u-name { font-size: 29rpx; font-weight: 700; color: #46405A; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.u-sub { margin-top: 4rpx; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.u-state { flex: none; margin-left: 14rpx; }
+.badge { font-size: 20rpx; padding: 4rpx 14rpx; border-radius: 16rpx; margin-left: 8rpx; }
+.badge.admin { color: #E11D48; background: #FFE4E6; }
+.badge.ok { margin-left: 0; font-size: 22rpx; color: #059669; background: #D1FAE5; }
+.approve-btn {
+  padding: 14rpx 30rpx; border-radius: 28rpx; font-size: 24rpx; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, #8B5CF6, #7C3AED); box-shadow: 0 6rpx 16rpx rgba(124, 58, 237, 0.28);
+}
+.approve-btn:active { transform: scale(0.94); }
+.empty { padding: 120rpx 0; }
+.tip { text-align: center; margin-top: 24rpx; }

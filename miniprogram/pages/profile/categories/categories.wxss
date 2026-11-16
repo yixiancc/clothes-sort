@@ -1,0 +1,54 @@
+.page { padding: 24rpx; box-sizing: border-box; }
+
+.add-row { display: flex; gap: 16rpx; margin-bottom: 24rpx; }
+.add-input {
+  flex: 1;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 20rpx 30rpx;
+  font-size: 28rpx;
+  color: #46405A;
+  box-shadow:
+    0 6rpx 18rpx rgba(124, 58, 237, 0.08),
+    inset 0 1rpx 2rpx rgba(255, 255, 255, 0.8);
+}
+.add-btn {
+  width: 170rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+}
+
+.list-card {
+  overflow: hidden;
+  border-radius: 32rpx;
+  background: #fff;
+  box-shadow:
+    0 10rpx 30rpx rgba(124, 58, 237, 0.08),
+    inset 0 2rpx 3rpx rgba(255, 255, 255, 0.85);
+}
+.row {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 30rpx;
+  border-bottom: 2rpx solid #F6F2FB;
+}
+.row:last-child { border-bottom: none; }
+.row-name { flex: 1; font-size: 28rpx; font-weight: 500; color: #46405A; }
+.row-actions { display: flex; gap: 28rpx; }
+.row-btn {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #7C3AED;
+  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
+  background: linear-gradient(135deg, #EDE9FE, #DDD6FE);
+  transition: transform 0.15s;
+}
+.row-btn:active { transform: scale(0.93); }
+.row-btn.danger {
+  color: #E11D48;
+  background: linear-gradient(135deg, #FFE4E6, #FECDD3);
+}
+
+.empty { padding: 140rpx 0; color: #C9BFE0; }

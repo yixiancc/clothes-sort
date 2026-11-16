@@ -1,0 +1,26 @@
+<view class="page">
+  <view class="search-bar">
+    <input class="search-input" placeholder="搜索用户名 / 昵称" value="{{keyword}}" confirm-type="search"
+           bindinput="onInput" bindconfirm="load" />
+  </view>
+
+  <view class="summary" wx:if="{{pendingCount > 0}}">有 {{pendingCount}} 位用户等待审核</view>
+
+  <view class="card user" wx:for="{{users}}" wx:key="id">
+    <view class="avatar {{item.is_admin ? 'admin' : ''}}">{{item.nickname ? item.nickname[0] : item.username[0]}}</view>
+    <view class="u-main">
+      <view class="u-name">{{item.nickname || item.username}}
+        <text class="badge admin" wx:if="{{item.is_admin}}">管理员</text>
+      </view>
+      <view class="u-sub muted">@{{item.username}} · {{item.clothes_count}} 件衣服</view>
+      <view class="u-sub muted">注册于 {{item.created_at}}</view>
+    </view>
+    <view class="u-state">
+      <text class="badge ok" wx:if="{{item.is_approved}}">已通过</text>
+      <view class="approve-btn" wx:else bindtap="approve" data-id="{{item.id}}" data-name="{{item.nickname || item.username}}">通过</view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && users.length === 0}}">没有找到用户</view>
+  <view class="tip muted" wx:if="{{users.length > 0}}">新建/编辑/删除用户、管理用户衣服请使用网页端管理后台</view>
+</view>

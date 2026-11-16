@@ -1,0 +1,30 @@
+<view class="page">
+  <view class="topbar">
+    <view class="topbar-title">我的搭配 <text class="muted">{{list.length}} 套</text></view>
+    <view class="new-btn" bindtap="create">＋ 新建搭配</view>
+  </view>
+
+  <view class="card outfit" wx:for="{{list}}" wx:key="id">
+    <view class="o-head" bindtap="previewOutfit" data-id="{{item.id}}">
+      <view class="o-name">{{item.name}}</view>
+      <view class="o-count muted">{{item.clothes_count}} 件</view>
+    </view>
+    <view class="thumbs" bindtap="previewOutfit" data-id="{{item.id}}">
+      <image class="thumb" wx:for="{{item.thumbs}}" wx:for-item="t" wx:key="clothes_id"
+             src="{{t.image_url}}" mode="aspectFill" lazy-load />
+      <view class="thumb more" wx:if="{{item.more > 0}}">+{{item.more}}</view>
+    </view>
+    <view class="o-note muted" wx:if="{{item.note}}">{{item.note}}</view>
+    <view class="o-wear {{item.worn_today ? 'worn' : ''}}">{{item.wearText}}</view>
+    <view class="o-actions">
+      <view class="action-btn wear {{item.worn_today ? 'done' : ''}}" bindtap="toggleWear" data-id="{{item.id}}">{{item.worn_today ? '✓ 今天穿了' : '今天穿这套'}}</view>
+      <view class="action-btn" bindtap="edit" data-id="{{item.id}}">编辑</view>
+      <view class="action-btn danger" bindtap="remove" data-id="{{item.id}}">删除</view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!loading && list.length === 0}}">
+    <view>还没有搭配</view>
+    <view class="empty-sub">把几件衣服组成一套，穿的时候一键记录</view>
+  </view>
+</view>

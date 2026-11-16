@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/clothes/list/list",
+    "pages/outfits/list/list",
+    "pages/clothes/form/form",
+    "pages/profile/profile",
+    "pages/outfits/form/form",
+    "pages/stats/stats",
+    "pages/calendar/calendar",
+    "pages/admin/admin",
+    "pages/profile/categories/categories",
+    "pages/profile/locations/locations",
+    "pages/profile/settings/settings"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#F4F1FA",
+    "navigationBarTitleText": "我的衣柜",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F4F1FA"
+  },
+  "tabBar": {
+    "color": "#B4A7D4",
+    "selectedColor": "#7C3AED",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/clothes/list/list", "text": "衣柜", "iconPath": "images/tab/closet.png", "selectedIconPath": "images/tab/closet-active.png" },
+      { "pagePath": "pages/outfits/list/list", "text": "搭配", "iconPath": "images/tab/outfit.png", "selectedIconPath": "images/tab/outfit-active.png" },
+      { "pagePath": "pages/clothes/form/form", "text": "添加", "iconPath": "images/tab/add.png", "selectedIconPath": "images/tab/add-active.png" },
+      { "pagePath": "pages/profile/profile", "text": "我的", "iconPath": "images/tab/me.png", "selectedIconPath": "images/tab/me-active.png" }
+    ]
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}
